@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>健身教练自媒体增长实战课 · 瑞士风重构版</title>
+  <meta name="description" content="3 天线下实战，把健身教练的专业能力重新设计成客户看得懂、视频拍得出、AI 能放大、私域能承接的内容获客系统。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fafaf8;
+      --ink: #0a0a0a;
+      --grey-1: #f0f0ee;
+      --grey-2: #d4d4d2;
+      --grey-3: #737373;
+      --accent: #ff6b35;
+      --accent-on: #ffffff;
+      --max: 1240px;
+      --gutter: 48px;
+      --rule: 1px solid var(--grey-2);
+      color-scheme: light;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+      line-height: 1.5;
+      letter-spacing: 0;
+      text-rendering: optimizeLegibility;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 40;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      padding: 16px var(--gutter);
+      border-bottom: var(--rule);
+      background: rgba(250, 250, 248, .94);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      background: var(--accent);
+      color: var(--accent-on);
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--grey-3);
+    }
+
+    .nav .nav-cta {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 14px;
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .section {
+      min-height: 88svh;
+      padding: 104px var(--gutter) 78px;
+      border-bottom: var(--rule);
+      background: var(--paper);
+    }
+
+    .section.hero {
+      min-height: 82svh;
+      padding-top: 120px;
+      background: var(--paper);
+      color: var(--ink);
+      border-bottom: var(--rule);
+    }
+
+    .section.tight {
+      min-height: auto;
+    }
+
+    .inner {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+    }
+
+    .grid-12 {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .span-2 { grid-column: span 2; }
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-9 { grid-column: span 9; }
+
+    .meta {
+      margin: 0 0 18px;
+      color: var(--grey-3);
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .hero .meta {
+      color: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 0;
+      max-width: 920px;
+      font-size: 92px;
+      line-height: .94;
+      font-weight: 300;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      max-width: 840px;
+      font-size: 64px;
+      line-height: .98;
+      font-weight: 300;
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    .lead {
+      margin: 28px 0 0;
+      max-width: 620px;
+      color: var(--grey-3);
+      font-size: 21px;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    .body-large {
+      margin: 26px 0 0;
+      max-width: 760px;
+      color: var(--grey-3);
+      font-size: 20px;
+      line-height: 1.75;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border: 1px solid currentColor;
+      border-radius: 0;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 800;
+      white-space: normal;
+    }
+
+    .btn.primary {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .hero .btn.primary {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .hero .btn.secondary {
+      color: var(--ink);
+      border-color: var(--grey-2);
+    }
+
+    .hero-aside {
+      align-self: end;
+      display: grid;
+      gap: 1px;
+      background: rgba(255, 107, 53, .34);
+      border: 1px solid rgba(255, 107, 53, .34);
+    }
+
+    .hero-fact {
+      min-height: 112px;
+      padding: 20px;
+      background: var(--accent);
+      color: var(--accent-on);
+    }
+
+    .hero-fact strong {
+      display: block;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 300;
+    }
+
+    .hero-fact span {
+      display: block;
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .82);
+    }
+
+    .pain-list {
+      display: grid;
+      gap: 1px;
+      background: var(--grey-2);
+      border: var(--rule);
+    }
+
+    .pain-list p {
+      margin: 0;
+      padding: 22px;
+      background: var(--paper);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .system-board {
+      margin-top: 46px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 4px solid var(--accent);
+      border-left: var(--rule);
+    }
+
+    .system-board article {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      border-right: var(--rule);
+      border-bottom: var(--rule);
+      background: var(--paper);
+    }
+
+    .system-board strong {
+      color: var(--accent);
+      font-size: 48px;
+      line-height: 1;
+      font-weight: 300;
+    }
+
+    .system-board p {
+      margin: 18px 0 0;
+      color: var(--grey-3);
+      font-size: 16px;
+    }
+
+    .image-proof {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .poster {
+      margin: 0;
+      border: var(--rule);
+      background: var(--grey-1);
+    }
+
+    .poster img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .poster figcaption {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 18px;
+      padding: 18px;
+      border-top: var(--rule);
+      color: var(--grey-3);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .poster figcaption strong {
+      color: var(--ink);
+    }
+
+    .audience-grid,
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 42px;
+      background: var(--grey-2);
+      border: var(--rule);
+    }
+
+    .module-grid {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+
+    .audience-grid article,
+    .module-grid article {
+      min-height: 210px;
+      padding: 22px;
+      background: var(--paper);
+    }
+
+    .audience-grid span,
+    .module-grid span {
+      display: block;
+      margin-bottom: 34px;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .audience-grid p,
+    .module-grid p {
+      margin-bottom: 0;
+      color: var(--grey-3);
+      font-size: 15px;
+    }
+
+    .timeline {
+      margin-top: 44px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .timeline article {
+      display: grid;
+      grid-template-columns: 140px 220px 1fr;
+      gap: 24px;
+      padding: 24px 0 24px 28px;
+      border-bottom: var(--rule);
+      align-items: start;
+    }
+
+    .timeline span {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .timeline h3 {
+      margin-bottom: 0;
+    }
+
+    .timeline p {
+      margin-bottom: 0;
+      color: var(--grey-3);
+      font-size: 17px;
+    }
+
+    .compare {
+      margin-top: 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .compare-column {
+      border: var(--rule);
+    }
+
+    .compare-column header {
+      padding: 18px 22px;
+      background: var(--grey-1);
+      border-bottom: var(--rule);
+      font-weight: 800;
+    }
+
+    .compare-column p {
+      margin: 0;
+      padding: 18px 22px;
+      border-bottom: var(--rule);
+      color: var(--grey-3);
+      font-size: 16px;
+    }
+
+    .compare-column p:last-child {
+      border-bottom: 0;
+    }
+
+    .compare-column.accent header {
+      background: var(--accent);
+      color: var(--accent-on);
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 42px;
+      align-items: end;
+    }
+
+    .qr {
+      border: var(--rule);
+      background: var(--paper);
+      padding: 16px;
+    }
+
+    .qr img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    .qr p {
+      margin: 12px 0 0;
+      color: var(--grey-3);
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .legal {
+      margin-top: 36px;
+      padding-top: 18px;
+      border-top: var(--rule);
+      color: var(--grey-3);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      :root {
+        --gutter: 20px;
+      }
+
+      .site-header {
+        position: absolute;
+        grid-template-columns: 1fr auto;
+      }
+
+      .nav a:not(.nav-cta) {
+        display: none;
+      }
+
+      .section,
+      .section.hero {
+        min-height: auto;
+        padding: 94px var(--gutter) 68px;
+      }
+
+      .grid-12,
+      .image-proof,
+      .compare,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .span-2,
+      .span-3,
+      .span-4,
+      .span-5,
+      .span-6,
+      .span-7,
+      .span-8,
+      .span-9 {
+        grid-column: 1;
+      }
+
+      h1 {
+        font-size: 52px;
+        max-width: 9ch;
+      }
+
+      h2 {
+        font-size: 38px;
+      }
+
+      .lead,
+      .body-large {
+        font-size: 18px;
+      }
+
+      .hero-aside {
+        margin-top: 32px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-fact {
+        min-height: 96px;
+        padding: 16px;
+      }
+
+      .hero-fact strong {
+        font-size: 30px;
+      }
+
+      .system-board,
+      .audience-grid,
+      .module-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .system-board article,
+      .audience-grid article,
+      .module-grid article {
+        min-height: auto;
+      }
+
+      .timeline article {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .poster figcaption {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="回到顶部">
+      <span class="brand-mark">F</span>
+      <span>冯老师 · 自媒体增长课</span>
+    </a>
+    <nav class="nav" aria-label="页面导航">
+      <a href="#why">课程价值</a>
+      <a href="#system">闭环系统</a>
+      <a href="#cases">案例</a>
+      <a href="#inside">课程内容</a>
+      <a href="#schedule">3 天现场</a>
+      <a class="nav-cta" href="#consult">报名联系</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="section hero" data-section="hero">
+      <div class="inner grid-12">
+        <div class="span-8">
+          <p class="meta">Fitness media course / 3-day field lab</p>
+          <h1>健身教练自媒体增长实战课</h1>
+          <p class="lead">把你的专业能力重新设计成客户看得懂、视频拍得出、AI 能放大、私域能承接的内容获客系统。</p>
+          <div class="btn-row">
+            <a class="btn primary" href="#consult">咨询本期名额</a>
+            <a class="btn secondary" href="#inside">查看课程内容</a>
+          </div>
+        </div>
+        <aside class="span-4 hero-aside" aria-label="课程关键词">
+          <div class="hero-fact"><strong>3 天</strong><span>线下实战，而不是只听理论</span></div>
+          <div class="hero-fact"><strong>4 环</strong><span>定位 / 拍摄 / AI / 承接</span></div>
+          <div class="hero-fact"><strong>7 模块</strong><span>覆盖内容获客全链路</span></div>
+          <div class="hero-fact"><strong>9 能力</strong><span>沉淀可复用的专业表达系统</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="why" data-section="why-now">
+      <div class="inner grid-12">
+        <div class="span-5">
+          <p class="meta">Why now</p>
+          <h2>你不是不专业，是客户没有在视频里感受到你的专业。</h2>
+          <p class="body-large">这门课要解决的不是“拍几条好看的视频”，而是建立完整的内容获客思维：让客户看得懂你的专业，感受到你的服务，愿意咨询你，并且能被私域和线下服务持续承接。</p>
+        </div>
+        <div class="span-7 pain-list">
+          <p>线下课上得认真，但视频像普通训练记录</p>
+          <p>账号发了不少内容，却很少有人私信咨询</p>
+          <p>视频有播放量，但来的不是你想服务的客户</p>
+          <p>会评估、会带课，却讲不清给普通客户听</p>
+          <p>拍摄时想到什么拍什么，剪辑时找不到有用画面</p>
+          <p>客户加微信后，不知道怎么继续建立信任</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="system" data-section="system">
+      <div class="inner">
+        <p class="meta">System</p>
+        <h2>3 天跑完一条内容闭环。</h2>
+        <p class="body-large">从账号定位开始，经历脚本设计、现场拍摄、拍后复盘、剪辑练习、AI 文案生成、三平台发布和私域承接。</p>
+        <div class="system-board">
+          <article>
+            <div><strong>01</strong><h3>定位</h3></div>
+            <p>找到账号该服务的人群、城市、业务路径和成交产品。</p>
+          </article>
+          <article>
+            <div><strong>02</strong><h3>拍摄</h3></div>
+            <p>把一节私教课拆成可拍、可剪、可转化的素材。</p>
+          </article>
+          <article>
+            <div><strong>03</strong><h3>AI</h3></div>
+            <p>把录音、素材和经验整理成脚本、文案、报告和知识库。</p>
+          </article>
+          <article>
+            <div><strong>04</strong><h3>承接</h3></div>
+            <p>让短视频、直播、朋友圈和私域回到真实业务。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cases" data-section="evidence">
+      <div class="inner">
+        <p class="meta">Evidence</p>
+        <h2>不是只讲方法，也保留真实项目和学员结果。</h2>
+        <p class="body-large">一部分是冯老师参与孵化陪跑的客户 IP，一部分是课程和陪跑体系中的学员案例。这里保留原始海报信息，方便直接看到账号和结果呈现。</p>
+        <div class="image-proof">
+          <figure class="poster">
+            <img src="assets/incubated-cases.jpg" alt="孵化陪跑的客户 IP 案例海报">
+            <figcaption><strong>Incubated Cases</strong><span>孵化陪跑项目中的客户 IP、多平台呈现和账号结果。</span></figcaption>
+          </figure>
+          <figure class="poster">
+            <img src="assets/student-cases.jpg" alt="部分学员案例展示海报">
+            <figcaption><strong>Student Cases</strong><span>私教、体态、普拉提、工作室等方向的学员账号成果。</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tight" data-section="audience">
+      <div class="inner">
+        <p class="meta">Audience</p>
+        <h2>适合已经有专业能力，但线上表达和获客链路没有打通的人。</h2>
+        <div class="audience-grid">
+          <article><span>01</span><h3>私教 / 普拉提老师</h3><p>有服务能力，但视频里讲不清、拍不出专业感。</p></article>
+          <article><span>02</span><h3>体态 / 康复从业者</h3><p>专业术语很多，需要翻译成客户听得懂的话。</p></article>
+          <article><span>03</span><h3>工作室老板 / 馆主</h3><p>不想长期依赖低价体验课和老客户转介绍。</p></article>
+          <article><span>04</span><h3>课程型项目</h3><p>想把短视频、直播、AI 和私域串成稳定系统。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="inside" data-section="inside">
+      <div class="inner">
+        <p class="meta">Inside the course</p>
+        <h2>7 大模块，把内容获客链路拆完整。</h2>
+        <div class="module-grid">
+          <article><span>01</span><h3>行业认知与 IP 定位</h3><p>明确客户、城市、领域和成交产品。</p></article>
+          <article><span>02</span><h3>多平台运营与账号基础</h3><p>抖音、视频号、小红书的内容适配。</p></article>
+          <article><span>03</span><h3>转化型短视频系统</h3><p>私教 Vlog、沉浸式教学、学员种草。</p></article>
+          <article><span>04</span><h3>现场拍摄与素材设计</h3><p>手机、麦克风、支架、光线、机位和收音。</p></article>
+          <article><span>05</span><h3>拍摄复盘与剪辑练习</h3><p>从素材理解拍摄，从剪辑反推脚本。</p></article>
+          <article><span>06</span><h3>AI 私教应用</h3><p>文案、报告、标题、封面、知识库和团队资产。</p></article>
+          <article><span>07</span><h3>直播、私域与长期 IP</h3><p>直播框架、私域承接、客户筛选和长期复盘。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="schedule" data-section="schedule">
+      <div class="inner grid-12">
+        <div class="span-4">
+          <p class="meta">3-day field lab</p>
+          <h2>围绕真实业务，把闭环拆开练。</h2>
+        </div>
+        <div class="span-8 timeline">
+          <article><span>Phase 01</span><h3>看清方向</h3><p>明确账号吸引谁、现在内容为什么没有咨询、哪些内容只是热闹。</p></article>
+          <article><span>Phase 02</span><h3>设计内容</h3><p>拆私教 Vlog、沉浸式教学、学员种草和转化型视频。</p></article>
+          <article><span>Phase 03</span><h3>现场拍摄</h3><p>设计主题、脚本、台词、机位、收音和客户反馈。</p></article>
+          <article><span>Phase 04</span><h3>拍后复盘</h3><p>复盘画面、台词、机位、专业表达和素材可剪辑程度。</p></article>
+          <article><span>Phase 05</span><h3>剪辑与 AI 生产</h3><p>用录音、字幕和素材生成文案、开头、标题、封面和报告。</p></article>
+          <article><span>Phase 06</span><h3>发布、承接和复盘</h3><p>三平台发布、私域承接、月度复盘和有效内容放大。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tight" data-section="compare">
+      <div class="inner">
+        <p class="meta">Difference</p>
+        <h2>这门课和普通自媒体课有什么不同。</h2>
+        <div class="compare">
+          <div class="compare-column">
+            <header>普通自媒体课常讲</header>
+            <p>平台规则和流量技巧</p>
+            <p>爆款标题和选题</p>
+            <p>口播和剪辑技巧</p>
+            <p>AI 写文案</p>
+            <p>账号涨粉</p>
+          </div>
+          <div class="compare-column accent">
+            <header>这门课重点解决</header>
+            <p>健身教练如何把专业变成客户看得懂的内容</p>
+            <p>什么内容能带来有效咨询，而不是只有播放量</p>
+            <p>一节私教课如何设计成可拍、可剪、可转化素材</p>
+            <p>AI 如何进入视频、报告、朋友圈、知识库和团队资产</p>
+            <p>账号如何服务私域承接、线下服务和长期 IP</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="consult" data-section="cta">
+      <div class="inner contact-panel">
+        <div>
+          <p class="meta">Contact</p>
+          <h2>如果线上表达、视频拍摄和客户承接一直没有打通，这 3 天会把整条链路拆开练一遍。</h2>
+          <p class="body-large">扫码添加冯教练微信，咨询本期课程名额、时间安排和适合情况。沟通前可以先说明你的城市、目前业务类型，以及你现在最卡的是账号定位、拍摄表达、AI 生产，还是私域承接。</p>
+          <div class="btn-row">
+            <a class="btn primary" href="#inside">再看课程内容</a>
+            <a class="btn" href="#top">回到顶部</a>
+          </div>
+        </div>
+        <figure class="qr">
+          <img src="assets/contact-qr.jpg" alt="冯教练微信二维码">
+          <figcaption>
+            <p>扫码添加冯教练</p>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="inner legal">
+        本课程不承诺固定涨粉、固定成交或固定收益结果。课程中涉及训练、体态、康复表达的部分，均以教学经验和内容呈现方法为主，不构成医疗诊断或治疗建议。
+      </div>
+    </section>
+  </main>
+</body>
+</html>
